@@ -5,20 +5,19 @@ using namespace std;
 #define VLL vector<long long>
 #define ll long long
 const int mod = 1e9+7;
-ll remove(ll n, ll k){
-    if(n==1) return 1;
-    int mid = (n+1)/2;
-    if(k<=mid){
-        if(2*k>n) return 2*k%n;
-        else return 2*k;
+ll exp(ll base, ll pow, ll m = mod){
+    base%=mod;
+    ll ans = 1 % m;
+    while(pow){
+        if(pow&1) ans = 1LL*ans*base % m;
+        base = 1LL*base*base % m;
+        pow>>=1;
     }
-    int nr = remove(n/2, k-mid);
-    if(n%2 == 1) return 2*nr + 1;
-    else return 2*nr -1;
+    return ans;
 }
 void solve(){
-    ll n,k; cin>>n>>k;
-    cout << remove(n,k) << endl;
+    ll a,b; cin>>a>>b;
+    cout << exp(a,b,mod) << endl;
 }
 int main(){
     ios_base::sync_with_stdio(0);
